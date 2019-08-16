@@ -10,10 +10,9 @@ import sha3
 password = ["password1", "password2"]
 
 
-def encrypt(password):
+def encrypt(msg, password):
     bufferSize = 64 * 1024
     # pobieram dane so wyslania
-    msg = input()
     f = open("data.txt", "a")
     f.write(msg)
     # tworzenie hashu do sprawdzenia wyjsciowej wiadomosci

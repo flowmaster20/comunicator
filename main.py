@@ -10,3 +10,6 @@ pssd = input()
 if (sha(login) == "0de1eff369facd15147c395bd2a71b1991666700a9e2bf58d8cbec4b"):
     if (sha(pssd) == "9dcc83ad783bd9fcac5417ab3fb91f26747503f8f88eeb8db0ed9f2d"):
         while (true):
+            msg = input()
+            encrypt.encrypt(msg, ["mati2000", "koniec"])
+            web_interface.upload_file()
