@@ -6,44 +6,44 @@ import pyAesCrypt
 import sha3
 
 # encryption/decryption buffer size - 64K
-bufferSize = 64 * 1024
-password = "foopassword"
-"""
-binary_data = b"This is encoded text \x00\x01"
-msg = input()
 
-fin = io.BytesIO(msg)
-fciph = io.BytesIO()
-fdec = io.BytesIO()
+password = ["password1", "password2"]
 
-pyAesCrypt.encryptStream(fin, fciph, password, bufferSize)
 
-print("encrypted: " + str(fciph.getvalue()))
+def encrypt(password):
+    bufferSize = 64 * 1024
+    # pobieram dane so wyslania
+    msg = input()
+    f = open("data.txt", "a")
+    f.write(msg)
+    # tworzenie hashu do sprawdzenia wyjsciowej wiadomosci
+    s = sha3.sha3_224(msg.encode('utf-8')).hexdigest()
 
-ctlen = len(fciph.getvalue())
+    # encrypt
+    pyAesCrypt.encryptFile("data.txt", "data.txt.aes", password[0], bufferSize)
 
-fciph.seek(0)
+    # unlimited layers of encoding
+    """
+    for i in range(len(password)-2):
+        pyAesCrypt.encryptFile("data.txt", "data.txt.aes", password[0], bufferSize)
+    """
 
-pyAesCrypt.decryptStream(fciph, fdec, password, bufferSize, ctlen)
+    pyAesCrypt.encryptFile("data.txt.aes", "output.txt.aes",
+                           password[len(password) - 1], bufferSize)
 
-print("decrypted: " + str(fdec.getvalue()))
-"""
+    return s
 
-# pobieram dane so wyslania
-msg = input()
 
-# tworzenie hashu do sprawdzenia
-s = sha3.sha3_224(msg.encode('utf-8')).hexdigest()
+def decrypt(password, input_file, sha_):
+    bufferSize = 64 * 1024
+    wynik = pyAesCrypt.decryptFile(
+        input, "data.txt.aes", password[1], bufferSize)
 
-# encrypt
-pyAesCrypt.encryptFile("data.txt", "data.txt.aes", password, bufferSize)
-pyAesCrypt.encryptFile("data.txt.aes", "output.txt.aes", password, bufferSize)
-
-# decrypt
-wynik = pyAesCrypt.decryptFile(
-    "output.txt.aes", "data.txt.aes", password, bufferSize)
-wynik = pyAesCrypt.decryptFile(
-    "data.txt.aes", "output.txt", password, bufferSize)
-
-print(s)
-print(wynik)
+    wynik = pyAesCrypt.decryptFile(
+        "data.txt.aes", "output.txt", password[0], bufferSize)
+    f = open("output.txt"."r")
+    wynik = f.read()
+    if (sha3.sha3_224(wynik.encode('utf-8')).hexdigest() == sha_):
+        print(wynik)
+    else:
+        print("message corupted")
