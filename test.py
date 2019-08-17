@@ -11,7 +11,7 @@ if you want to trigger them manualy run this file
 
 class TestComunicator(unittest.TestCase):
 
-    def test_case(self):
+    def test_simple_sha(self):
         input = "dom"
         ex_output = "987fb38f30bfac4d7e336f96565768e9b6e24a2365c3c5a8109ba73c"
         msg = "sha function not working"
