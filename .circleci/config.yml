@@ -1,13 +1,11 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/comunicator
+    working_directory: ~/
     docker:
     - image: circleci/python:3.6.4
     steps:
       -checkout
-      -run:
-        command: |
-          sudo pip install pipenv
-          pipenv install sha3
-          pipenv run python test.py test
+      -run: sudo pip install pipenv
+      -run: pipenv install sha3
+      -run: pipenv run python test.py test
