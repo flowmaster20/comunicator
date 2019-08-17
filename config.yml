@@ -1,0 +1,14 @@
+jobs:
+  Build Error:
+    docker:
+    - image: bash:4.4.19
+    steps:
+    - run:
+        name: Config Processing Error (Don't rerun)
+        command: "python3 -m unittest -v"
+workflows:
+  version: 2
+  Build Error:
+    jobs:
+    - Build Error
+version: 2
