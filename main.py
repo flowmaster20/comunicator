@@ -7,14 +7,16 @@ from simple_sha import simple_sha
 
 def run(usr):
     while (0 == 0):
+
         web_interface.get_file(usr)
         encrypt.decrypt(["mati2000", "koniec"])
         msg = input()
         encrypt.encrypt(msg, ["mati2000", "koniec"])
-        web_interface.upload_file(usr)
+        web_interface.upload_file(usr % 1)
 
         print("would you like to send another file (y/n)")
         response = input()
+
         if(response == "n"):
             break
 
