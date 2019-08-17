@@ -1,14 +1,13 @@
-jobs:
-  Build Error:
-    docker:
-    - image: bash:4.4.19
-    steps:
-    - run:
-        name: Config Processing Error (Don't rerun)
-        command: "python3 -m unittest -v"
-workflows:
-  version: 2
-  Build Error:
-    jobs:
-    - Build Error
 version: 2
+jobs:
+  build:
+    working_directory: ~/comunicator
+    docker:
+    - image: circleci/python:3.6.4
+    steps:
+      -checkout
+      -run:
+        command:
+          sudo pip install pipenv
+          pipenv install sha3
+          pipenv run python test.py test
