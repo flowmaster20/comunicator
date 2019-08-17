@@ -7,7 +7,7 @@ jobs:
     steps:
       -checkout
       -run:
-        command:
+        command: |
           sudo pip install pipenv
           pipenv install sha3
           pipenv run python test.py test
