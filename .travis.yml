@@ -1,4 +1,5 @@
 dist: trusty
 language: python
 script:
+  - python3 -m pip install pysha3
   - cd $TRAVIS_BUILD_DIR; python3 -m unittest -v
