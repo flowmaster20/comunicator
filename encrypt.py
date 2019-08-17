@@ -40,7 +40,7 @@ def decrypt(password, input_file, sha_):
 
     wynik = pyAesCrypt.decryptFile(
         "data.txt.aes", "output.txt", password[0], bufferSize)
-    f = open("output.txt"."r")
+    f = open("output.txt", "r")
     wynik = f.read()
     if (sha3.sha3_224(wynik.encode('utf-8')).hexdigest() == sha_):
         print(wynik)

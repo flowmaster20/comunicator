@@ -1,11 +1,15 @@
 version: 2
+workflows:
+  main:
+    jobs:
+      - build
 jobs:
   build:
-    working_directory: ~/
-    docker:
-    - image: circleci/python:3.6.4
+    machine:
+      image
+          - image: circleci/python:3.6.4
     steps:
-      -checkout
+      - checkout
       -run: sudo pip install pipenv
       -run: pipenv install sha3
       -run: pipenv run python test.py test
